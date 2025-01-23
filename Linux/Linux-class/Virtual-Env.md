@@ -23,5 +23,5 @@ ansible-playbook -i ansible/aws_ec2.yml ansible/deploy_apache.yml
 
  -u ec2-user
 
-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
+
  
