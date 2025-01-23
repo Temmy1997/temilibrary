@@ -1,0 +1,16 @@
+version: "3.7"
+services: 
+  web:
+    build: .
+    image: my-project-image:v2
+    ports:
+      - "8081:80"
+    volumes:
+      - vol1:/usr/local/apache2/htdocs/
+
+  db:
+    
+volumes:
+  vol2:
+  vol1:
+    external: true

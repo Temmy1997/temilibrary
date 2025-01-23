@@ -1,0 +1,31 @@
+{
+    "Rules": [{
+            "ID": "MoveToIntelligentTiering",
+            "Filter": {},
+            "Prefix": "",
+            "Status": "Enabled",
+            "Transitions": [{
+                "Days": 0,
+                "StorageClass": "INTELLIGENT_TIERING"
+            }]
+        },
+        {
+            "ID": "MoveToIntelligentTieringDeepArchive",
+            "Filter": {},
+            "Prefix": "",
+            "Status": "Enabled",
+            "Transitions": [{
+                "Days": 120,
+                "StorageClass": "DEEP_ARCHIVE"
+            }]
+        },
+        {
+            "ID": "DeleteAfter3Years",
+            "Prefix": "",
+            "Status": "Enabled",
+            "Expiration": {
+                "Days": 1095
+            }
+        }
+    ]
+}

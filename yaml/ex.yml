@@ -1,0 +1,29 @@
+---
+- name: Example Playbook
+  hosts: your_target_hosts
+  become: yes
+  become_method: sudo
+  vars:
+    variable1: value1
+    variable2: value2
+
+  tasks:
+    - name: Task 1
+      command: echo "Hello, World!"
+
+    - name: Task 2
+      template:
+        src: template.conf.j2
+        dest: /etc/example.conf
+      notify: restart service
+
+    - name: Task 3
+      yum:
+        name: package_name
+        state: latest
+
+  handlers:
+    - name: restart service
+      service:
+        name: example_service
+        state: restarted

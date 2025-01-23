@@ -1,0 +1,48 @@
+<head>
+        <title>Full-time Faculty Evaluation</title>
+        <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+        <div class="banner">
+                <!-- <header class="site-header">
+                        <div class="site-identity">
+                                <img src="pgcc.jpg" />
+                                <h1>
+                                        STEM Full-Time Faculty Evaluation
+                                </h1>
+                        </div>
+                        <nav class="site-navigation">
+                                <ul class="nav">
+                                        <li>
+                                                <a href="#">About</a>
+                                                <a href="#">Contact</a>
+                                        </li>
+                                </ul>
+                        </nav>
+                </header> -->
+
+                <div class="navbar">
+                        <img src="pgcc.jpg" class="logo" />
+                        <ul>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Contact</a></li>
+                        </ul>
+                </div>
+
+                <div class="message-content">
+                        <h1>
+                                STEM Full-Time Faculty Evaluation
+                        </h1>
+                        <p>
+                                Scan the QR code to an automated full-time faculty evalaution OR <i><u><b>click the link</b></u></i> to
+                                fill the form online.
+                        </p>
+                        <div class="aligned">
+                                <img class="qr" src="qr-code.jpg">
+                                <a href="https://www.jotform.com/app/223265760814154" target="_blank">
+                                        <button type="button">ONLINE FORM</button>
+                                </a>
+                        </div>
+                </div>
+        </div>

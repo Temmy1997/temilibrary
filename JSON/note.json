@@ -1,0 +1,41 @@
+# JSON TYPES
+String : "Hello world"
+Numbers: 10 1.5 -30
+Booleans: true /false
+null: null 
+Arrays: [1,2,3] ["Heello", "World"]
+objects: {"key":"value"}  {"age":"30"}
+
+## json file 
+{
+    "name": "Temi",
+    "favaortNumber": 3,
+    "isaprgrammer": true,
+    "hobbies": ["dancing, "Bowling"],
+    "freinds": [{
+    "name": "Temi",
+    "favoriteNumber": 3,
+    "isaprogrammer": true,
+    "hobbies": ["dancing, "Bowling"],
+    "friends": [...]
+    }] 
+}
+
+## EXAMPLE 
+## Create an array (Array alwsy start with [])
+## Create an object {}
+
+[
+    {
+        "name": "Big Corporation",
+        "numberofemployess": 1000,
+        "ceo": "Temi",
+        "rating": 5.0   
+    },
+    {   "name": "Small Corporation",
+        "numberofemployess": 10,
+        "ceo": null,
+        "rating": 3.0   
+    }
+]
+
