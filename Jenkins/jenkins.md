@@ -1,7 +1,7 @@
 # JENKINS
  * jenkins is an open-source automation platform that helps to automate parts of the software development process. 
- * It is used for building g deploying and automating software development task. to automate the building, testing, and deployment of software applications. Jenkins provides hundreds of plugins to support building, deploying, and automating any project.
- * It is a popular tool for continuous integration and continuous delivery (CI/CD) pipelines.
+ * It is used for building deploying and automating software development task. to automate the building, testing, and deployment of software applications. Jenkins provides hundreds of plugins to support building, deploying, and automating any project.
+ * It is a popular tool for continuous integration and continuous deployment (CI/CD) pipelines.
  * Just project a web GUI 
 
 ## KEY CONCEPTS 
