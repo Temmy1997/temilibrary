@@ -8,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'bda47056-5d9a-4c9c-88d0-c9e7b7de34f5', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    echo "Build stage
+                    echo "Build stage"
                 }
             }
         }
