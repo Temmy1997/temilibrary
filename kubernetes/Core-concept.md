@@ -1,13 +1,20 @@
 # Kubernetes (K8S)
-* This is an open source platform used to magae linux containers accross private, public cloud environments
+* Kubernetes (often called K8s) is an open-source platform that helps you automate:
+    1. Deploying applications
+    2. Scaling them up or down containers 
+    3. Managing and monitoring them
+* This is used to managae linux containers accross private, public cloud environments
 * Used for containers ochestration 
-* used for scaling up containers and scaling down containers 
 
-CLUSTER ARCHITECTURES 
+## Key Concepts in Kubernetes:
+* Pod:	The smallest unit — runs your app (usually a container)
+* Node:	 A machine (VM or physical) where pods run
+* Cluster:  A group of nodes managed by Kubernetes
+* Deployment: 	Describes how many copies of your app to run
+* Service:  	Exposes your app so users can access it
 
 # MASTER/CONTROL NODE 
 * Manages kubenetes cluster 
-* Stores info about diffrent notes 
 * Contol playing component are the component that does all the work.
 
 Component of master node 

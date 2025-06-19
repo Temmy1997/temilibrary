@@ -2,11 +2,20 @@
 
 - This is a free opensource tool that can automate the configuration of several servers
 - We use ansible to write codes in YAML
-- This codes are deployed on to several servers
+- This codes are deployed on to several servers 
+- Ansible helps to automate the task of (Installing, Configuration, Deployment)
 
 ## Installation of Ansible
 
 - yum install ansible -y
+
+- sudo pip install ansible
+pip allows you to install the very latest stable release of Ansible as soon as it's available on PyPI (the Python Package Index)
+
+## ANSIBLE GALAXY
+- Ansible galaxy is a public hub for the ansible community to share and reuse automation content. 
+
+
 
 # Understand Core Components of Ansible
 
@@ -16,6 +25,15 @@
 * Ansible is simole to learn.
 * Ansible used YAML(Yet Another Markup Language)
 * YAML uses SSH protocol to communicate with remote servers
+
+# Example 
+---
+# This playbook deploys and configures an Nginx web server.
+#
+# To run this playbook:
+# ansible-playbook -i inventory.ini nginx_webserver.yml
+
+
 
 ## YAML 
 1. lIST 
