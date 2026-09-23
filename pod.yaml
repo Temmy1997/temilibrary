@@ -1,0 +1,116 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-12-08T18:40:14Z"
+  generateName: apache-deployment-9495686bb-
+  labels:
+    app: apache
+    pod-template-hash: 9495686bb
+  name: apache-deployment-9495686bb-pd8ww
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: apache-deployment-9495686bb
+    uid: 7272de1c-5850-421c-b374-ace43a0bdff9
+  resourceVersion: "17421"
+  uid: 0702ca00-f423-49b5-a710-e8d5a364c81f
+spec:
+  containers:
+  - image: temmy1997/temmy-apache:latest
+    imagePullPolicy: Always
+    name: apache
+    ports:
+    - containerPort: 9090
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-qdzv4
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: cluster1-worker2
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-qdzv4
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-12-08T18:40:14Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-12-18T01:48:16Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-12-18T01:48:16Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-12-08T18:40:14Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://424be536a2b3a79cb4e7a3576f4a58ffb309cd29c46b3f64b63834876b10c68f
+    image: docker.io/temmy1997/temmy-apache:latest
+    imageID: docker.io/temmy1997/temmy-apache@sha256:5e62c27a132956e901993ffa2b1e249aa58e6300731cee3f6a6b0927dfc4d9fe
+    lastState:
+      terminated:
+        containerID: containerd://508fb0fada15095d5a0b5c2756034e64d2ef7700de4d876d86446799f1216622
+        exitCode: 255
+        finishedAt: "2023-12-18T01:47:58Z"
+        reason: Unknown
+        startedAt: "2023-12-08T19:29:18Z"
+    name: apache
+    ready: true
+    restartCount: 2
+    started: true
+    state:
+      running:
+        startedAt: "2023-12-18T01:48:15Z"
+  hostIP: 172.18.0.5
+  phase: Running
+  podIP: 10.244.2.2
+  podIPs:
+  - ip: 10.244.2.2
+  qosClass: BestEffort
+  startTime: "2023-12-08T18:40:14Z"

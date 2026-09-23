@@ -1,0 +1,67 @@
+pipeline {
+    agent any
+    stages {
+        stage("SCM Checkout") {
+            steps {
+                // Checkout the code from the Git repository
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[credentialsId: 'i-0fae9a1517e6faba5', url: 'https://github.com/Temmy1997/temi-library.git']]
+                ])
+            }
+        }
+        stage("Run Ansible Deploy") {
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'i-0fae9a1517e6faba5', keyFileVariable: 'SSH_KEY')]) {
+                    script {
+                        // Define the Ansible SSH arguments to disable known hosts check
+                        def ansibleSshArgs = "-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+                        
+                        // Build the ansible-playbook command
+                        def ansibleCommand = """
+                            ansible-playbook -i ansible/aws_ec2.yml \\
+                            -e "ansible_ssh_private_key_file=${SSH_KEY}" \\
+                            ansible/deploy_apache.yml
+                        """.stripIndent()
+                        
+                        // Run the ansible-playbook command
+                        sh """
+                            export ANSIBLE_SSH_ARGS="${ansibleSshArgs}"
+                            ${ansibleCommand}
+                        """
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+// pipeline {
+//     agent any
+
+//     stages {
+//         stage('Checkout from version control') {
+//             steps {
+//                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'i-0fae9a1517e6faba5', url: 'https://github.com/Temmy1997/temi-library.git']])
+//             }
+//         }
+        
+//         stage('Execute Project') {
+//             steps {
+//                 withCredentials([sshUserPrivateKey(credentialsId: 'i-0fae9a1517e6faba5', keyFileVariable: 'SSH_KEY')]) {
+//                     sh '''#!/bin/bash
+//                         export ANSIBLE_SSH_ARGS="-O UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+//                         ansible-playbook -i ansible/aws_ec2.yml -e "ansible_ssh_private_key_file=$SSH_KEY" ansible/deploy_apache.yml
+//                     '''
+//                     // ansiblePlaybook credentialsId: 'i-0fae9a1517e6faba5', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/var/lib/jenkins/workspace/automated_pipeline/ansible/aws_ec2.yml', playbook: '/var/lib/jenkins/workspace/automated_pipeline/ansible/deploy_apache.yml'
+//                 }
+//             }
+//         }
+//     }
+// }
+

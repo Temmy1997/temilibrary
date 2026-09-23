@@ -1,0 +1,28 @@
+---
+# ansible-playbook template.yml 
+
+# - name: Run tasks on all hosts
+#  hosts: localhost
+#   vars: 
+#    env: test 
+
+- name: Using the Ansible Debug Module
+  hosts: localhost  # You can specify the target hosts or use "localhost" for testing.
+  gather_facts: true  # Enable gathering facts (default) to access system-related variables.
+  
+  tasks:
+    - name: Display Ansible Built-in Facts
+      debug:
+        var: ansible_facts
+      # By specifying "var: ansible_facts," you can display all built-in Ansible facts.
+
+    - name: Display Ansible Built-in Facts
+      debug:
+        var: ansible_hosts
+
+    - name: Display Ansible Built-in Facts
+      debug:
+        var: ansible_user
+      
+
+   

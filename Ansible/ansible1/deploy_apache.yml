@@ -1,0 +1,80 @@
+---
+- name: Install Apache on Amazon Linux
+  hosts: all
+  remote_user: ec2-user
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+    - name: Install Apache 
+      yum:
+        name: httpd
+        state: present
+      when: ansible_distribution == "CentOS" 
+      become_user: ec2-user
+    
+    - name: Install Apache 
+      yum:
+        name: apache2
+        state: present
+      when: ansible_distribution == "Ubuntu" 
+      become_user: ubuntu
+  
+    - name: Start Apache 
+      ansible.builtin.service:
+        name: httpd
+        state: started
+      when: ansible_distribution == "CentOS" 
+      become_user: ec2-user
+
+    - name: Start Apache 
+      ansible.builtin.service:
+        name: apache2
+        state: started
+      when: ansible_distribution == "Ubuntu" 
+      become_user: ubuntu
+        
+    - name: Ensure Apache service is enabled and running 
+      systemd:
+        name: httpd
+        enabled: yes
+        state: started
+      when: ansible_distribution == "CentOS" 
+      become_user: ec2-user
+        
+    - name: Ensure Apache service is enabled and running 
+      systemd:
+        name: apache2
+        enabled: yes
+        state: started
+      when: ansible_distribution == "Ubuntu"
+      become_user: ubuntu
+    
+    - name: Copy website files
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+      when: ansible_distribution == "CentOS" 
+      become_user: ec2-user
+
+    - name: Copy website files
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+      when: ansible_distribution == "Ubuntu"
+      become_user: ubuntu
+
+    - name: Restart Apache 
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
+      when: ansible_distribution == "CentOS" 
+      become_user: ec2-user
+      
+    - name: Restart Apache 
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
+      when: ansible_distribution == "Ubuntu"
+      become_user: ubuntu

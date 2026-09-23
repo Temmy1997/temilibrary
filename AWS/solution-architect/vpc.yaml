@@ -1,0 +1,102 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: This template creates a vpc with public and private subnet.
+  
+Metadata:
+  
+Parameters:
+  VpcCIDR:
+    Default: 10.0.0.0/16
+    Description: Please enter the IP range for this VPC 
+    Type: String 
+
+  PublicSubnet1CIDR:
+    Default: 10.0.0.0/24
+    Description: Please enter the IP range for this public subnet 1
+    Type: String
+
+  PublicSubnet2CIDR:
+    Default: 10.0.1.0/24
+    Description: Please enter the IP range for the public subnet 2
+    Type: String
+  
+  PrivateSubnet1CIDR:
+    Default: 10.0.2.0/24
+    Description: Please enter the IP range for the private subnet 1
+    Type: String
+    
+  PrivateSubnet2CIDR:
+    Default: 10.0.3.0/24
+    Description: Please enter the IP range for the private subnet 2
+    Type: String
+
+  PrivateSubnet3CIDR:
+    Default: 10.0.4.0/24
+    Description: Please enter the IP range for the private subnet 3
+    Type: String
+  
+  PrivateSubnet4CIDR:
+    Default: 10.0.5.0/24
+    Description: Please enter the IP range for the private subnet 4
+    Type: String
+
+  PrivateSubnet4CIDR:
+    Default: 10.0.5.0/24
+    Description: Please enter the IP range for the private subnet 4
+    Type: String
+
+  SSHLocation:
+    AllowedPattern: '(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})'
+    ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
+    Default: 0.0.0.0/0
+    Description: The IP address range that can be used to access the web server using SSH.
+    MaxLength: '18'
+    MinLength: '9'
+    Type: String
+
+Resources:
+  VPC: 
+    Type: AWS::EC2::VPC
+    Properties: 
+      CidrBlock: !Ref VpcCIDR
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      InstanceTenancy: default
+      Tags: 
+        - Key: Name
+          Value: Test VPC 
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties: 
+      Tags: 
+        -Key: Name
+         Value: Test IGN
+
+  InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties: 
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC 
+      
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties: 
+      AvailabilityZone: String
+      AvailabilityZoneId: String
+      CidrBlock: String
+      EnableDns64: Boolean
+      Ipv6CidrBlock: String
+      Ipv6Native: Boolean
+      MapPublicIpOnLaunch: Boolean
+      OutpostArn: String
+      PrivateDnsNameOptionsOnLaunch: 
+        PrivateDnsNameOptionsOnLaunch
+      Tags: 
+        - Tag
+      VpcId: String
+
+
+
+  
+Outputs:

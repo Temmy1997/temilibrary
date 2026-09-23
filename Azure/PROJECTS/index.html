@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Azure Upload Portal</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; }
+    #gallery img { width: 180px; height: 180px; object-fit: cover; margin: 8px; border-radius: 8px; }
+    #status { margin-top: 12px; font-size: 14px; color: #555; }
+    button { padding: 10px 20px; background: #0078D4; color: white; border: none;
+             border-radius: 6px; cursor: pointer; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<h1>Upload an image</h1>
+
+<script>
+  // ---- REPLACE THESE TWO VALUES ----
+  const myuploadportal2026 = "myuploadportal";     // your storage account name
+  const sv=2026-02-06&ss=b&srt=o&sp=rwdlactfx&se=2026-05-23T02:02:05Z&st=2026-05-22T17:47:05Z&spr=https&sig=%2BY1ypA4iLnHSmcGRvSa%2B1cKiszqTVyKj%2F90KpxoYcCk%3D    = "sv=2022...&sig=..."; // paste your SAS token here (no leading ?)
+  // ----------------------------------
+
+  const CONTAINER   = "uploads";
+  const BLOB_BASE   = `https://${myuploadportal2026}.blob.core.windows.net/${CONTAINER}`;
+</script>
+<input type="file" id="fileInput" accept="image/*" />
+<button onclick="uploadFile()">Upload</button>
+<p id="status"></p>
+
+<h2>Gallery</h2>
+<div id="gallery"></div>
+<script>
+async function uploadFile() {
+  const file   = document.getElementById("fileInput").files[0];
+  const status = document.getElementById("status");
+
+  if (!file) { status.textContent = "Please pick a file first."; return; }
+
+  // Build the blob URL: base URL + filename + SAS token
+  const blobUrl = `${BLOB_BASE}/${file.name}?${sv=2026-02-06&ss=b&srt=o&sp=rwdlactfx&se=2026-05-23T02:02:05Z&st=2026-05-22T17:47:05Z&spr=https&sig=%2BY1ypA4iLnHSmcGRvSa%2B1cKiszqTVyKj%2F90KpxoYcCk%3D}`;
+
+  status.textContent = "Uploading...";
+
+  try {
+    const response = await fetch(blobUrl, {
+      method: "PUT",
+      headers: {
+        "x-ms-blob-type": "BlockBlob",   // required by Azure Blob REST API
+        "Content-Type": file.type
+      },
+      body: file
+    });
+
+    if (response.ok) {
+      status.textContent = "Upload successful!";
+      loadGallery(); // refresh gallery after upload
+    } else {
+      status.textContent = `Upload failed: ${response.status} ${response.statusText}`;
+    }
+  } catch (err) {
+    status.textContent = `Error: ${err.message}`;
+  }
+}
+</script>
+<script>
+async function loadGallery() {
+  const listUrl = `${BLOB_BASE}?restype=container&comp=list&${sv=2026-02-06&ss=b&srt=o&sp=rwdlactfx&se=2026-05-23T02:02:05Z&st=2026-05-22T17:47:05Z&spr=https&sig=%2BY1ypA4iLnHSmcGRvSa%2B1cKiszqTVyKj%2F90KpxoYcCk%3D}`;
+  const gallery = document.getElementById("gallery");
+
+  try {
+    const response = await fetch(listUrl);
+    const text     = await response.text();
+
+    // Azure returns XML — parse it to get blob names
+    const parser   = new DOMParser();
+    const xml      = parser.parseFromString(text, "text/xml");
+    const blobs    = xml.querySelectorAll("Blob Name");
+
+    gallery.innerHTML = "";
+    blobs.forEach(blob => {
+      const name = blob.textContent;
+      const img  = document.createElement("img");
+      img.src    = `${BLOB_BASE}/${name}`;
+      img.alt    = name;
+      gallery.appendChild(img);
+    });
+
+    if (blobs.length === 0) {
+      gallery.textContent = "No images uploaded yet.";
+    }
+  } catch (err) {
+    gallery.textContent = "Could not load gallery.";
+  }
+}
+
+// Load gallery when page first opens
+loadGallery();
+</script>
+
+</body>
+</html>
+

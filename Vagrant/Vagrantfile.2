@@ -1,0 +1,16 @@
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Image = "centos/7"
+N = 5
+
+Vagrant.configure("2") do |config|  
+   (1..N).each do |i|
+      config.vm.define "vm-#{i}" do |vm|
+        vm.vm.box = Image
+        vm.vm.network "public_network", ip: "10.0.0.90.#{i + 5}"
+      end 
+    end 
+end
+    
