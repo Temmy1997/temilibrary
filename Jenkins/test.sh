@@ -1,4 +1,4 @@
 #!/bin/bash 
 echo "This is a test script for Jenkins."
-NUMBER-$ (( $NUMBERONE + $NUMBERTWO ))
+NUMBER=$ (( $NUMBERONE + $NUMBERTWO ))
 echo "$NUMBER"

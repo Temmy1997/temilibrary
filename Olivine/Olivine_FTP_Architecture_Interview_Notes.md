@@ -16,7 +16,7 @@
 Olivine's FTP service is hosted on a **Windows Azure Virtual Machine**
 running **Internet Information Services (IIS) FTP**.
 
-The public FTP endpoint discussed is:
+The public FTP end/point discussed is:
 
 ``` text
 ftps.olivineinc.com
