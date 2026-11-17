@@ -18,6 +18,7 @@
 * Contol playing component are the component that does all the work.
 
 Component of master node 
+The componsnt are keopt in the kube system namespace
 1. ETCD CLUSTER 
 2. Kube-Schedulelr
 3. KUBE-APISERVER

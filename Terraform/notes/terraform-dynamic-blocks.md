@@ -147,3 +147,10 @@ Why this is often better: the EBS volume now has its **own independent lifecycle
 ---
 
 *Compiled from developer.hashicorp.com/terraform documentation pages: Dynamic Blocks.*
+
+
+
+dynamic block can also do on or off on tht block 
+
+|| means OR 
+"" means empty string 
