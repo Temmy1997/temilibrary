@@ -4,3 +4,4 @@ echo "This is a test script for Jenkins."
 
 NUMBER=$(( NUMBERONE + NUMBERTWO ))
 echo "The sum is $NUMBER"
+echo "This was added"
